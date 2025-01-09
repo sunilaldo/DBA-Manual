@@ -1,0 +1,8 @@
+import xml.etree.ElementTree as ET
+
+root = ET.fromstring(xml_data)
+
+for student in root.findall('student'):
+    age = int(student.find('age').text)
+if age>21:
+   print(student.find('name').text)
