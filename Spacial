@@ -1,0 +1,17 @@
+#spacial 4rth
+
+CREATE DATABASE mngya;
+USE mngya;
+CREATE TABLE MYA_2 (
+    player_name VARCHAR(255) ,  
+    ID INT,
+    teams TEXT,
+    geom GEOMETRY  ,
+    PRIMARY KEY (ID)
+);
+
+INSERT INTO MYA_2 (player_name, ID, teams, geom)
+VALUES ("ROHIT ", 98, "MI", ST_GeomFromText('POLYGON((18 0, 0 4, 4 0,3 3,18 0))'));
+
+select * from MYA_2;
+select ID from MYA_2;
