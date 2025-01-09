@@ -1,0 +1,72 @@
+1. // Insert a new record:
+   db.emp.insertOne({
+     eno: 7369,
+     ename: 'smith',
+     hiredate: new Date('1980-12-17'),
+     job: 'clerk',
+     deptno: 20,
+     salary: 800,
+     comm: null
+   });
+
+2. // Update salaries by 200:
+   db.emp.updateMany(
+     {},
+     { $inc: { salary: 200 } }
+   );
+
+3. // Update salary for specific employee (eno = 7566):
+   db.emp.updateOne(
+     { eno: 7566 },
+     { $set: { salary: 3000 } }
+   );
+
+4. // Insert a record with NULL values (MongoDB stores null as a value):
+   db.emp.insertOne({
+     eno: null,
+     ename: null,
+     hiredate: null,
+     job: null,
+     deptno: null,
+     salary: null,
+     comm: null
+   });
+
+5. // Delete a record (ename = 'adams'):
+   db.emp.deleteOne({ ename: 'adams' });
+
+6. // Select all records:
+   db.emp.find();
+
+7. // Select employees with salary > 3000:
+   db.emp.find({ salary: { $gt: 3000 } }, { eno: 1, ename: 1 });
+
+8. // Select employees with salary between 2000 and 3000:
+   db.emp.find({ salary: { $gte: 2000, $lte: 3000 } }, { ename: 1 });
+
+9. // Select employees whose job is not 'manager':
+   db.emp.find({ job: { $ne: 'manager' } }, { ename: 1 });
+
+10. // Select employees whose name starts with 'J':
+    db.emp.find({ ename: { $regex: '^J' } }, { ename: 1 });
+
+11. // Select employees with names of length 4:
+    db.emp.find({ $expr: { $eq: [{ $strLenCP: "$ename" }, 4] } }, { ename: 1 });
+
+12. // Select employees from certain departments (10 and 20):
+    db.emp.find({ deptno: { $in: [10, 20] } }, { eno: 1, ename: 1, salary: 1 });
+
+13. // Select employees whose name is like '___r%':
+    db.emp.find({ ename: { $regex: '^...r' } }, { ename: 1 });
+
+14. // Select employees with no commission:
+    db.emp.find({ comm: null });
+
+15. // Select employees with updated salary:
+    db.emp.find({}, { eno: 1, ename: 1, updated_salary: { $add: ["$salary", 200] } });
+
+16. // Select employees with the 'manager' job:
+    db.emp.find({ job: 'manager' }, { eno: 1, deptno: 1 });
+
+17. // Commit (In MongoDB, operations are automatically committed, but you can use transactions if needed in multi-operation scenarios. No explicit COMMIT is required):
+    // MongoDB handles commit automatically. If you need multi-document transactions, you would use startSession(), commitTransaction(), and abortTransaction().
