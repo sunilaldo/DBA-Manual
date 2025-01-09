@@ -1,0 +1,5 @@
+CREATE CLASS Employee;
+CREATE PROPERTY Employee.name STRING;
+CREATE PROPERTY Employee.age INTEGER;
+INSERT INTO Employee (name, age) VALUES ('Alice', 30);
+INSERT INTO Employee (name, age) VALUES ('Bob', 25);
